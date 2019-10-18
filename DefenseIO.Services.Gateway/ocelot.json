@@ -1,0 +1,39 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "chat",
+      "UpstreamPathTemplate": "/api/chatting/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "contracting",
+      "UpstreamPathTemplate": "/api/contracting/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "identity",
+      "UpstreamPathTemplate": "/api/identity/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "report",
+      "UpstreamPathTemplate": "/api/reporting/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
+}
