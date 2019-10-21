@@ -1,5 +1,5 @@
-﻿using DefenseIO.Domain.Core;
-using DefenseIO.Infra.IoC.Injectors;
+﻿using DefenseIO.Infra.IoC.Injectors;
+using DefenseIO.Infra.Shared.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DefenseIO.Infra.IoC

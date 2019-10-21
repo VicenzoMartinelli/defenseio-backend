@@ -7,7 +7,7 @@ namespace DefenseIO.Infra.ApiConfig.ServiceDiscovery
 {
   public static class ServiceDiscoveryExtensions
   {
-    public static void AddServiceDiscovery(this IServiceCollection services, ServiceConfig serviceConfig)
+    public static IServiceCollection AddServiceDiscovery(this IServiceCollection services, ServiceConfig serviceConfig)
     {
       if (serviceConfig == null)
       {
@@ -22,6 +22,8 @@ namespace DefenseIO.Infra.ApiConfig.ServiceDiscovery
       services.AddSingleton(serviceConfig);
       services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
       services.AddSingleton<IConsulClient, ConsulClient>(p => consulClient);
+
+      return services;
     }
   }
 }

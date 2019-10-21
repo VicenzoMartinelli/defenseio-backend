@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DefenseIO.Domain.Core
+namespace DefenseIO.Infra.Shared.Notifications
 {
   public class Notification
   {

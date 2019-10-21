@@ -1,38 +1,23 @@
 ﻿using AutoMapper;
-using AutoMapper.Configuration;
+using DefenseIO.Infra.Shared.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using Sponte.Erp.Legado.PortalPaciente.Infra.IoC;
 
 namespace DefenseIO.Infra.ApiConfig.AutoMapper
 {
   public static class AutoMapperSetup
   {
-    private static object _initialized = false;
-
-    public static void AddAutoMapperSetup(this IServiceCollection services)
+    public static IServiceCollection AddAutoMapperSetup(this IServiceCollection services)
     {
-      lock (_initialized)
+      MapperConfiguration mappingConfig = new MapperConfiguration(mc =>
       {
-        Mapper.Reset();
+        mc.CreateMap<byte, bool>().ConvertUsing(s => s.AsBool());
 
-        var cfg = CreateMapper();
+      });
 
-        Mapper.Initialize(cfg);
+      IMapper mapper = mappingConfig.CreateMapper();
+      services.AddSingleton(mapper);
 
-        services.AddAutoMapper(AddProfiles, typeof(Startup));
-
-        _initialized = true;
-      }
-    }
-
-    private static MapperConfigurationExpression CreateMapper()
-    {
-      var cfg = new MapperConfigurationExpression();
-
-      cfg.CreateMap<byte, bool>().ConvertUsing(s => s.AsBool());
-      cfg.AddProfiles();
-
-      return cfg;
+      return services;
     }
   }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using FluentValidation.Results;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace DefenseIO.Domain.Core
+namespace DefenseIO.Infra.Shared.Notifications
 {
   public class NotificationContext
   {
@@ -74,7 +74,7 @@ namespace DefenseIO.Domain.Core
       _notifications.Add(new Notification(campo, code, valor, description, status));
     }
 
-    private void PushNotifications(IEnumerable<Notification> notificacoes)
+    public void PushNotifications(IEnumerable<Notification> notificacoes)
     {
       _notifications.AddRange(notificacoes);
     }
@@ -114,7 +114,7 @@ namespace DefenseIO.Domain.Core
           valor = string.Empty;
         }
 
-        AdicionarNotification(error.PropertyName, error.ErrorCode, valor, error.ErrorMessage);
+        PushNotification(error.PropertyName, error.ErrorCode, valor, error.ErrorMessage);
       });
     }
 

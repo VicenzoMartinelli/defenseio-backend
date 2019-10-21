@@ -4,4 +4,19 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Domains\Contracts\" />
+    <Folder Include="Domains\Negociation\" />
+    <Folder Include="Domains\Report\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DefenseIO.Infra.Shared\DefenseIO.Infra.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

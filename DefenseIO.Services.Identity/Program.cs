@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace DefenseIO.Services.Identity
 {
@@ -17,8 +10,12 @@ namespace DefenseIO.Services.Identity
       CreateWebHostBuilder(args).Build().Run();
     }
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>();
+    public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+    {
+      var isIisExpress = System.Diagnostics.Process.GetCurrentProcess().ProcessName.Equals("iisexpress");
+
+      return WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>();
+    }
   }
 }

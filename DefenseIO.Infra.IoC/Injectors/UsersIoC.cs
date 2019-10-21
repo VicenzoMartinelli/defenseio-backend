@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DefenseIO.Infra.IoC.Injectors
 {
@@ -6,7 +7,7 @@ namespace DefenseIO.Infra.IoC.Injectors
   {
     public static void AddUsersIoC(this IServiceCollection services)
     {
-
+      services.AddScoped<IRequestHandler<>>
     }
   }
 }

@@ -14,13 +14,13 @@
       "UpstreamPathTemplate": "/api/contracting/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
     },
-    {
-      "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
-      "ServiceName": "identity",
-      "UpstreamPathTemplate": "/api/identity/{everything}",
-      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
-    },
+    //{
+    //  "DownstreamPathTemplate": "/{everything}",
+    //  "DownstreamScheme": "http",
+    //  "ServiceName": "identity",
+    //  "UpstreamPathTemplate": "/api/identity/{everything}",
+    //  "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ] 
+    //},
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
@@ -28,11 +28,30 @@
       "UpstreamPathTemplate": "/api/reporting/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
     },
+    {
+      "DownstreamPathTemplate": "/auth/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "identity",
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/geo/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "geographic",
+      "UpstreamPathTemplate": "/geographic/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    }
   ],
   "GlobalConfiguration": {
+    //"ServiceDiscoveryProvider": {
+    //  "Host": "consul",
+    //  "Port": 8500,
+    //  "Type": "Consul"
+    //},
     "ServiceDiscoveryProvider": {
-      "Host": "consul",
-      "Port": 8500,
+      "Host": "localhost",
+      "Port": 32768,
       "Type": "Consul"
     }
   }
