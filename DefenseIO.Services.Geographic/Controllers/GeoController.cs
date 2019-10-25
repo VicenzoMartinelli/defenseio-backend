@@ -13,7 +13,6 @@ namespace DefenseIO.Services.Geographic.Controllers
   {
     private readonly IDistrictRepository _districtRepository;
     private readonly ICityRepository _cityRepository;
-
     public GeoController(IDistrictRepository districtRepository, ICityRepository cityRepository)
     {
       _districtRepository = districtRepository;

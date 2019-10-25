@@ -21,11 +21,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Data\Mappings\" />
-    <Folder Include="Data\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DefenseIO.Domain\DefenseIO.Domain.csproj" />
     <ProjectReference Include="..\DefenseIO.Infra.ApiConfig\DefenseIO.Infra.ApiConfig.csproj" />
   </ItemGroup>
 

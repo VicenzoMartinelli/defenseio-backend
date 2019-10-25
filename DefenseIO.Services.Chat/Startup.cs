@@ -1,7 +1,8 @@
-﻿using DefenseIO.Infra.ApiConfig;
+﻿using DefenseIO.Domain.Domains.Chatting.Interfaces;
+using DefenseIO.Infra.ApiConfig;
 using DefenseIO.Services.Chat.Data.Contexts;
+using DefenseIO.Services.Chat.Data.Repositories;
 using DefenseIO.Services.Chat.Hubs;
-using DefenseIO.Services.Chat.Repositories;
 using DefenseIO.Services.Chat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,8 +26,8 @@ namespace DefenseIO.Services.Chat
         Configuration,
         () =>
         {
-          services.AddSingleton<ChatRepository>();
-          services.AddSingleton<ChatService>();
+          services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+          services.AddScoped<ChatService>();
           services.AddSignalR();
         });
     }

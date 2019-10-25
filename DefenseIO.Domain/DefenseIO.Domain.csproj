@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domains\Contracts\" />
-    <Folder Include="Domains\Negociation\" />
     <Folder Include="Domains\Report\" />
   </ItemGroup>
 
