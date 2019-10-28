@@ -3,15 +3,17 @@ using System;
 using DefenseIO.Services.Contracting.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DefenseIO.Services.Contracting.Data.Migrations
 {
     [DbContext(typeof(ContractingContext))]
-    partial class ContractingContextModelSnapshot : ModelSnapshot
+    [Migration("20191026011523_add-seeds-modality")]
+    partial class addseedsmodality
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

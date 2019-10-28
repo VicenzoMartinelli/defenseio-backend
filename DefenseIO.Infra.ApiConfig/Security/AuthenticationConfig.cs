@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using DefenseIO.Domain.Domains.Users.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +11,8 @@ namespace DefenseIO.Infra.ApiConfig.Security
   {
     public static IServiceCollection AddAuthenticationSetup(this IServiceCollection services, IConfiguration configuration)
     {
+      services.AddScoped<ILoggedUserAcessor, LoggedUserAcessor>();
+
       var secSettings = configuration.GetSection("TokenValidationConfig");
       services.Configure<ValidationTokenConfig>(secSettings);
       var secObj = secSettings.Get<ValidationTokenConfig>();

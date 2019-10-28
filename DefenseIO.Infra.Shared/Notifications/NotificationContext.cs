@@ -7,8 +7,8 @@ namespace DefenseIO.Infra.Shared.Notifications
   public class NotificationContext
   {
     private readonly List<Notification> _notifications;
-    public IReadOnlyCollection<Notification> Notificacoes => _notifications;
-    public virtual bool PossuiNotificacoes => _notifications.Any();
+    public IReadOnlyCollection<Notification> Notifications => _notifications;
+    public virtual bool AnyNotification => _notifications.Any();
 
     public static readonly string[] SIZE_VALIDATORS = {
             "MaxLenth", "MinLength", "LessThan", "GreaterThan", "LessThanOrEqualTo", "GreaterThanOrEqualTo"

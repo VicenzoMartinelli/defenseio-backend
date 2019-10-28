@@ -1,10 +1,10 @@
 ﻿{
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/auth/{everything}",
       "DownstreamScheme": "http",
-      "ServiceName": "chat",
-      "UpstreamPathTemplate": "/api/chatting/{everything}",
+      "ServiceName": "identity",
+      "UpstreamPathTemplate": "/api/auth/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
     },
     {
@@ -14,32 +14,25 @@
       "UpstreamPathTemplate": "/api/contracting/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
     },
-    //{
-    //  "DownstreamPathTemplate": "/{everything}",
-    //  "DownstreamScheme": "http",
-    //  "ServiceName": "identity",
-    //  "UpstreamPathTemplate": "/api/identity/{everything}",
-    //  "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ] 
-    //},
+    {
+      "DownstreamPathTemplate": "/geo/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "geographic",
+      "UpstreamPathTemplate": "/api/geographic/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "ServiceName": "chat",
+      "UpstreamPathTemplate": "/api/chatting/{everything}",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
+    },
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "ServiceName": "report",
       "UpstreamPathTemplate": "/api/reporting/{everything}",
-      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
-    },
-    {
-      "DownstreamPathTemplate": "/auth/{everything}",
-      "DownstreamScheme": "http",
-      "ServiceName": "identity",
-      "UpstreamPathTemplate": "/auth/{everything}",
-      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
-    },
-    {
-      "DownstreamPathTemplate": "/geo/{everything}",
-      "DownstreamScheme": "http",
-      "ServiceName": "geographic",
-      "UpstreamPathTemplate": "/geographic/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]
     }
   ],

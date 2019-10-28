@@ -106,6 +106,15 @@ namespace DefenseIO.Infra.Shared.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O campo {0} é inválido.
+        /// </summary>
+        public static string InvalidField {
+            get {
+                return ResourceManager.GetString("InvalidField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A senha informada não atende os critérios de segurança.
         /// </summary>
         public static string InvalidPassword {
@@ -120,6 +129,24 @@ namespace DefenseIO.Infra.Shared.Messages {
         public static string InvalidToken {
             get {
                 return ResourceManager.GetString("InvalidToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} não encontrado/a.
+        /// </summary>
+        public static string ObjectNotExists {
+            get {
+                return ResourceManager.GetString("ObjectNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O campo {0} é de preenchimento obrigatório.
+        /// </summary>
+        public static string ObliguedField {
+            get {
+                return ResourceManager.GetString("ObliguedField", resourceCulture);
             }
         }
     }

@@ -42,11 +42,5 @@ namespace DefenseIO.Services.Identity.Controllers
 
       return Ok(res);
     }
-
-    [HttpGet("teste")]
-    public IActionResult Get()
-    {
-      return Ok("ADSADA");
-    }
   }
 }

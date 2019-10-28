@@ -1,6 +1,6 @@
 ﻿using DefenseIO.Domain.Domains.Users;
 using DefenseIO.Domain.Domains.Users.ViewModels;
-using DefenseIO.Infra.Shared.Metiat;
+using DefenseIO.Infra.Shared.MediatR;
 using System;
 
 namespace DefenseIO.Services.Identity.Commands.Registrer

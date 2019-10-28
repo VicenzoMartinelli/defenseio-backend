@@ -132,10 +132,19 @@
   <data name="InvalidEmail" xml:space="preserve">
     <value>O email informado é inválido</value>
   </data>
+  <data name="InvalidField" xml:space="preserve">
+    <value>O campo {0} é inválido</value>
+  </data>
   <data name="InvalidPassword" xml:space="preserve">
     <value>A senha informada não atende os critérios de segurança</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Este código é inválido ou expirado</value>
+  </data>
+  <data name="ObjectNotExists" xml:space="preserve">
+    <value>{0} não encontrado/a</value>
+  </data>
+  <data name="ObliguedField" xml:space="preserve">
+    <value>O campo {0} é de preenchimento obrigatório</value>
   </data>
 </root>

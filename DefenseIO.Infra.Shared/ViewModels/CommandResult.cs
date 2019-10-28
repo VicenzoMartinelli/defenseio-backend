@@ -17,5 +17,12 @@
       IsSuccess = true;
       return this;
     }
+
+    public CommandResult<T> ReturningFailed()
+    {
+      IsSuccess = false;
+
+      return this;
+    }
   }
 }

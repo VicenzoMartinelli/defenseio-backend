@@ -1,5 +1,5 @@
 ﻿using DefenseIO.Domain.Domains.Users.ViewModels;
-using DefenseIO.Infra.Shared.Metiat;
+using DefenseIO.Infra.Shared.MediatR;
 
 namespace DefenseIO.Services.Identity.Commands.Registrer
 {

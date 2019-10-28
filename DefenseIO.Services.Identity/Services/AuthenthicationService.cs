@@ -1,6 +1,7 @@
 ﻿using DefenseIO.Domain.Domains.Users;
 using DefenseIO.Domain.Domains.Users.ViewModels;
 using DefenseIO.Infra.ApiConfig.Security;
+using DefenseIO.Infra.Shared.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -26,9 +27,11 @@ namespace DefenseIO.Services.Identity.Services
       var identityClaims = new ClaimsIdentity();
 
       identityClaims.AddClaim(new Claim(JwtRegisteredClaimNames.Email, user.Email));
-      identityClaims.AddClaim(new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()));
       identityClaims.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+      identityClaims.AddClaim(new Claim(JwtRegisteredClaimNames.UniqueName, user.Name.ToString()));
       identityClaims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
+      identityClaims.AddClaim(new Claim(CustomClaims.UserTypeClaim, user.Type.AsNumericString()));
+      identityClaims.AddClaim(new Claim(CustomClaims.DocumentIdentifierClaim, user.DocumentIdentifier));
 
       var dataCriacao = DateTime.UtcNow;
       var tokenHandler = new JwtSecurityTokenHandler();

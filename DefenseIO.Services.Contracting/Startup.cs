@@ -1,10 +1,11 @@
-﻿using DefenseIO.Domain.Domains.Contracting.Interfaces;
-using DefenseIO.Infra.ApiConfig;
+﻿using DefenseIO.Infra.ApiConfig;
 using DefenseIO.Services.Contracting.Data.Contexts;
-using DefenseIO.Services.Contracting.Data.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NetCore.AutoRegisterDi;
+using System.Reflection;
 
 namespace DefenseIO.Services.Contracting
 {
@@ -21,10 +22,19 @@ namespace DefenseIO.Services.Contracting
     {
       services.AddDefenseIOServiceConfig<ContractingContext>(Configuration, () =>
       {
-        services.AddScoped<IModalityRepository, ModalityRepository>();
-        services.AddScoped<IAttendedModalityRepository, AttendedModalityRepository>();
-        services.AddScoped<ISolicitationRepository, SolicitationRepository>();
-        services.AddScoped<ISolicitationEvaluationRepository, SolicitationEvaluationRepository>();
+        var a = services.RegisterAssemblyPublicNonGenericClasses(Assembly.GetExecutingAssembly())
+         .Where(c => c.Name.EndsWith("Repository"));
+
+        a.TypeFilter = (x => x.Name != "IRepository");
+
+        a.AsPublicImplementedInterfaces();
+
+        //services.AddScoped<IModalityRepository, ModalityRepository>();
+        //services.AddScoped<IAttendedModalityRepository, AttendedModalityRepository>();
+        //services.AddScoped<ISolicitationRepository, SolicitationRepository>();
+        //services.AddScoped<ISolicitationEvaluationRepository, SolicitationEvaluationRepository>();
+
+        services.AddMediatR(typeof(Startup).Assembly);
       });
     }
 

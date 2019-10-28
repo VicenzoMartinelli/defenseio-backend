@@ -19,7 +19,7 @@ namespace DefenseIO.Infra.ApiConfig.Filters
 
     public void OnActionExecuting(ActionExecutingContext context)
     {
-      if (_context.PossuiNotificacoes)
+      if (_context.AnyNotification)
       {
         var responseObj = new ResultWithErrors(_context.GetNotifications());
 
@@ -51,7 +51,7 @@ namespace DefenseIO.Infra.ApiConfig.Filters
 
     public void OnActionExecuted(ActionExecutedContext context)
     {
-      if (_context.PossuiNotificacoes)
+      if (_context.AnyNotification)
       {
         var responseObj = new ResultWithErrors(_context.GetNotifications());
 

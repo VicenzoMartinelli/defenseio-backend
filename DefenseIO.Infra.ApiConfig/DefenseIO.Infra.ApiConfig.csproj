@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DefenseIO.Domain\DefenseIO.Domain.csproj" />
     <ProjectReference Include="..\DefenseIO.Infra.Shared\DefenseIO.Infra.Shared.csproj" />
   </ItemGroup>
 
