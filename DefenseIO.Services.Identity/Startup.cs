@@ -39,10 +39,10 @@ namespace DefenseIO.Services.Identity
 
         services.Configure<IdentityOptions>(options =>
         {
-          options.Password.RequireDigit = true;
-          options.Password.RequiredLength = 8;
+          options.Password.RequireDigit = false;
+          options.Password.RequiredLength = 6;
           options.Password.RequireLowercase = false;
-          options.Password.RequireNonAlphanumeric = true;
+          options.Password.RequireNonAlphanumeric = false;
           options.Password.RequireUppercase = false;
           options.Lockout.MaxFailedAccessAttempts = 10;
           options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromHours(2);

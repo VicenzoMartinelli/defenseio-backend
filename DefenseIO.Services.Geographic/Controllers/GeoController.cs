@@ -1,5 +1,4 @@
 ﻿using DefenseIO.Domain.Domains.Geographic.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -7,7 +6,6 @@ using System.Linq;
 namespace DefenseIO.Services.Geographic.Controllers
 {
   [Route("geo")]
-  [Authorize]
   [ApiController]
   public class GeoController : ControllerBase
   {
