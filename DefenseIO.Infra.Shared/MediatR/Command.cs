@@ -5,4 +5,7 @@ namespace DefenseIO.Infra.Shared.MediatR
 {
   public class Command<T> : IRequest<CommandResult<T>>
   { }
+
+  public class Command : IRequest<bool>
+  { }
 }

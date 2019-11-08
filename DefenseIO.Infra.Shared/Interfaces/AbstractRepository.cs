@@ -47,7 +47,9 @@ namespace DefenseIO.Infra.Shared.Interfaces
 
     public Task Remove(TEntity entity)
     {
-      throw new NotImplementedException();
+      DbSet.Remove(entity);
+
+      return Task.CompletedTask;
     }
 
     public async Task<TEntity> FindById(Guid id)

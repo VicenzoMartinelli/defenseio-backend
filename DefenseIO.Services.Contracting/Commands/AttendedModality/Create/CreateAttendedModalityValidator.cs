@@ -4,12 +4,12 @@ using FluentValidation;
 
 namespace DefenseIO.Services.Contracting.Commands.AttendedModality
 {
-  public class CreateAttendedModalityValidator : AbstractValidator<CreateAttendedModalityCommand>
+  public class CreateAttendedModalityCommandValidator : AbstractValidator<CreateAttendedModalityCommand>
   {
-    public CreateAttendedModalityValidator()
+    public CreateAttendedModalityCommandValidator()
     {
       RuleFor(x => x.Method)
-        .NotEmpty()
+        .IsInEnum()
         .WithErrorCode(nameof(Messages.InvalidField))
         .WithMessage(x => Messages.InvalidField.FormatValues(nameof(x.Method)));
 
@@ -17,11 +17,6 @@ namespace DefenseIO.Services.Contracting.Commands.AttendedModality
         .NotEmpty()
         .WithErrorCode(nameof(Messages.InvalidField))
         .WithMessage(x => Messages.InvalidField.FormatValues(nameof(x.ModalityId)));
-
-      RuleFor(x => x.ProviderUserId)
-        .NotEmpty()
-        .WithErrorCode(nameof(Messages.InvalidField))
-        .WithMessage(x => Messages.InvalidField.FormatValues(nameof(x.ProviderUserId)));
 
       RuleFor(x => x.BasicValue)
         .NotEmpty()

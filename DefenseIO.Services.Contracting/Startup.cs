@@ -1,5 +1,7 @@
 ﻿using DefenseIO.Infra.ApiConfig;
+using DefenseIO.Services.Contracting.Commands.AttendedModality;
 using DefenseIO.Services.Contracting.Data.Contexts;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -29,10 +31,8 @@ namespace DefenseIO.Services.Contracting
 
         a.AsPublicImplementedInterfaces();
 
-        //services.AddScoped<IModalityRepository, ModalityRepository>();
-        //services.AddScoped<IAttendedModalityRepository, AttendedModalityRepository>();
-        //services.AddScoped<ISolicitationRepository, SolicitationRepository>();
-        //services.AddScoped<ISolicitationEvaluationRepository, SolicitationEvaluationRepository>();
+        services.AddScoped<IValidator<UpdateAttendedModalityCommand>, UpdateAttendedModalityCommandValidator>();
+        services.AddScoped<IValidator<CreateAttendedModalityCommand>, CreateAttendedModalityCommandValidator>();
 
         services.AddMediatR(typeof(Startup).Assembly);
       });

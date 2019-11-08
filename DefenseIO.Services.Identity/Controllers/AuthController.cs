@@ -1,4 +1,6 @@
 ﻿using DefenseIO.Domain.Domains.Users;
+using DefenseIO.Infra.ApiConfig.Abstracts;
+using DefenseIO.Infra.Shared.Notifications;
 using DefenseIO.Services.Identity.Commands.Registrer;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,13 +10,10 @@ namespace DefenseIO.Services.Identity.Controllers
 {
   [Route("auth")]
   [ApiController]
-  public class AuthController : ControllerBase
+  public class AuthController : BaseApiController
   {
-    private readonly IMediator _mediator;
-
-    public AuthController(IMediator mediator)
+    public AuthController(IMediator mediator, NotificationContext notificationContext) : base(mediator, notificationContext)
     {
-      _mediator = mediator;
     }
 
     [HttpPost("{type}/register")]
@@ -24,7 +23,7 @@ namespace DefenseIO.Services.Identity.Controllers
 
       if (!res.IsSuccess)
       {
-        return BadRequest();
+        return await ResponseNotifications();
       }
 
       return Ok(res);

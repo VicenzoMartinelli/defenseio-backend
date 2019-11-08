@@ -18,9 +18,15 @@ namespace DefenseIO.Services.Geographic.Controllers
     }
 
     [HttpGet("districts")]
-    public IActionResult FindCities()
+    public IActionResult FindDistricts()
     {
       return Ok(_districtRepository.Query().ToList());
+    }
+
+    [HttpGet("cities/name/{name}")]
+    public IActionResult FindDistricts(string name)
+    {
+      return Ok(_cityRepository.Query(x => x.Name == name).FirstOrDefault());
     }
 
     [HttpGet("districts/{id:guid}/cities")]

@@ -3,6 +3,7 @@
   public enum SolicitationStatus
   {
     Created,
+    Recused,
     Accepted,
     Finished
   }
