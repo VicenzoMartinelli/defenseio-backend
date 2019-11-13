@@ -12,6 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="5.5.6" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.5.6" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
@@ -23,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DefenseIO.Domain\DefenseIO.Domain.csproj" />
     <ProjectReference Include="..\DefenseIO.Infra.ApiConfig\DefenseIO.Infra.ApiConfig.csproj" />
+    <ProjectReference Include="..\DefenseIO.Infra.DistributedCommunication\DefenseIO.Infra.DistributedCommunication.csproj" />
   </ItemGroup>
 
 </Project>

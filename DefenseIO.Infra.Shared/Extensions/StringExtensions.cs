@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -37,5 +38,18 @@ namespace DefenseIO.Infra.Shared.Extensions
 
       return new string(chars).Normalize(NormalizationForm.FormC);
     }
+
+    public static Guid SafeParse(this string input)
+    {
+      try
+      {
+        return Guid.Parse(input);
+      }
+      catch (Exception)
+      {
+        return Guid.Empty;
+      }
+    }
+
   }
 }

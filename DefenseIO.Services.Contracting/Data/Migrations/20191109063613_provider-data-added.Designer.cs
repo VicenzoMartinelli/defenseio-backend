@@ -3,15 +3,17 @@ using System;
 using DefenseIO.Services.Contracting.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DefenseIO.Services.Contracting.Data.Migrations
 {
     [DbContext(typeof(ContractingContext))]
-    partial class ContractingContextModelSnapshot : ModelSnapshot
+    [Migration("20191109063613_provider-data-added")]
+    partial class providerdataadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,25 +66,25 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d25f6b84-1ca1-412d-b388-b568666b5097"),
+                            Id = new Guid("f13f8e2f-0b7d-4d15-8621-fa8a4c9758bf"),
                             Description = "Segurança pessoal",
                             Key = "Personal"
                         },
                         new
                         {
-                            Id = new Guid("79234807-aa1b-4962-b3d3-d4185f8f24dd"),
+                            Id = new Guid("d42f34c2-e175-41bb-87f2-4b71cf08f009"),
                             Description = "Escolta armada",
                             Key = "ArmedEscort"
                         },
                         new
                         {
-                            Id = new Guid("e9e92c7e-d91f-4fd2-83a5-b7979084e9c5"),
+                            Id = new Guid("1d2bed80-f20c-495d-8aec-ab7901a7caaa"),
                             Description = "Transporte de valores",
                             Key = "ValuesTransportation"
                         },
                         new
                         {
-                            Id = new Guid("0b783988-a1a3-4eb0-b434-84f6e41b6212"),
+                            Id = new Guid("3c55bd7e-6e8d-490c-aa43-7ad891661482"),
                             Description = "Segurança patrimonial",
                             Key = "AssetSurveillance"
                         });

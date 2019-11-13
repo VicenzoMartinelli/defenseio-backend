@@ -64,11 +64,11 @@ namespace DefenseIO.Infra.ApiConfig
 
       app.UseAuthentication();
 
+      customMiddlewaresAdd?.Invoke();
+
       app.UseMvc();
 
       app.UseDefaultSwagger(configuration);
-
-      customMiddlewaresAdd?.Invoke();
     }
   }
 }

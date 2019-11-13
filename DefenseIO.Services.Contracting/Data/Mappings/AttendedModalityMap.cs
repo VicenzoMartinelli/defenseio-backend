@@ -33,7 +33,9 @@ namespace DefenseIO.Services.Contracting.Data.Mappings
         .IsRequired();
 
       builder
-        .Property(x => x.ProviderUserId)
+        .HasOne(x => x.Provider)
+        .WithMany()
+        .HasForeignKey(x => x.ProviderUserId)
         .IsRequired();
 
       builder.HasIndex(x => x.ProviderUserId);

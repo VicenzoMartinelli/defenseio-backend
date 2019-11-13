@@ -6,7 +6,7 @@ namespace DefenseIO.Domain.Domains.Contracting.Entities
   {
     [Description("Hora")]
     Hour,
-    [Description("Period")]
+    [Description("Periodo")]
     Period,
     [Description("Quilômetro")]
     KiloMeter,

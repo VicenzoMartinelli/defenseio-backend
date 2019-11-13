@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:65347",
+      "applicationUrl": "http://localhost:5010",
       "sslPort": 0
     }
   },
@@ -14,7 +14,7 @@
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "IIsDevelopment"
       }
     },
     "DefenseIO.Services.Chat": {
@@ -22,15 +22,14 @@
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "IIsDevelopment"
       },
-      "applicationUrl": "http://localhost:5000"
+      "applicationUrl": "http://localhost:5010"
     },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/values",
-      "environmentVariables": {},
       "httpPort": 65348
     }
   }

@@ -15,5 +15,7 @@ namespace DefenseIO.Infra.Shared.Interfaces
     IQueryable<TEntity> Query();
     IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicado);
     Task<bool> Exists(Expression<Func<TEntity, bool>> predicado);
+
+    Task<bool> SaveChanges();
   }
 }

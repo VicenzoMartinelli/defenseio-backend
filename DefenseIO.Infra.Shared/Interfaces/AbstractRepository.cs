@@ -16,11 +16,6 @@ namespace DefenseIO.Infra.Shared.Interfaces
       Db = context;
       DbSet = Db.Set<TEntity>();
     }
-
-    public async Task<int> SaveChanges()
-    {
-      return await Db.SaveChangesAsync();
-    }
     public void Dispose()
     {
       Db.Dispose();
@@ -52,7 +47,7 @@ namespace DefenseIO.Infra.Shared.Interfaces
       return Task.CompletedTask;
     }
 
-    public async Task<TEntity> FindById(Guid id)
+    public virtual async Task<TEntity> FindById(Guid id)
     {
       return await DbSet.FindAsync(id);
     }
@@ -69,6 +64,13 @@ namespace DefenseIO.Infra.Shared.Interfaces
     public async Task<bool> Exists(Expression<Func<TEntity, bool>> predicado)
     {
       return await DbSet.AsNoTracking().Where(predicado).AnyAsync();
+    }
+
+    public async Task<bool> SaveChanges()
+    {
+      await Db.SaveChangesAsync();
+
+      return true;
     }
   }
 }

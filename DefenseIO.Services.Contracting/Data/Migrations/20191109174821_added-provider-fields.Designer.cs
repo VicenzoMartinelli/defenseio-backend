@@ -3,15 +3,17 @@ using System;
 using DefenseIO.Services.Contracting.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DefenseIO.Services.Contracting.Data.Migrations
 {
     [DbContext(typeof(ContractingContext))]
-    partial class ContractingContextModelSnapshot : ModelSnapshot
+    [Migration("20191109174821_added-provider-fields")]
+    partial class addedproviderfields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,25 +66,25 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d25f6b84-1ca1-412d-b388-b568666b5097"),
+                            Id = new Guid("0dfb8c92-3bf7-4d13-aaf5-f9ced88a1ada"),
                             Description = "Segurança pessoal",
                             Key = "Personal"
                         },
                         new
                         {
-                            Id = new Guid("79234807-aa1b-4962-b3d3-d4185f8f24dd"),
+                            Id = new Guid("5efd700b-97a2-47f2-aa9c-cbc025b474bc"),
                             Description = "Escolta armada",
                             Key = "ArmedEscort"
                         },
                         new
                         {
-                            Id = new Guid("e9e92c7e-d91f-4fd2-83a5-b7979084e9c5"),
+                            Id = new Guid("28be71dc-0c2c-4421-b796-41a47ca2726e"),
                             Description = "Transporte de valores",
                             Key = "ValuesTransportation"
                         },
                         new
                         {
-                            Id = new Guid("0b783988-a1a3-4eb0-b434-84f6e41b6212"),
+                            Id = new Guid("ff29aaca-5574-499b-8d47-883c8f4883cf"),
                             Description = "Segurança patrimonial",
                             Key = "AssetSurveillance"
                         });
@@ -159,6 +161,36 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.ToTable("SolicitationEvaluation");
                 });
 
+            modelBuilder.Entity("DefenseIO.Domain.Domains.Geographic.City", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("DistrictId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("City");
+                });
+
+            modelBuilder.Entity("DefenseIO.Domain.Domains.Geographic.District", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Initials");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("District");
+                });
+
             modelBuilder.Entity("DefenseIO.Domain.Domains.Users.ProviderUser", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -211,7 +243,14 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
 
                             b1.HasKey("SolicitationId");
 
+                            b1.HasIndex("CityId");
+
                             b1.ToTable("Solicitation");
+
+                            b1.HasOne("DefenseIO.Domain.Domains.Geographic.City", "City")
+                                .WithMany()
+                                .HasForeignKey("CityId")
+                                .OnDelete(DeleteBehavior.Cascade);
 
                             b1.HasOne("DefenseIO.Domain.Domains.Contracting.Entities.Solicitation.Solicitation")
                                 .WithOne("Location")
@@ -225,6 +264,14 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.HasOne("DefenseIO.Domain.Domains.Contracting.Entities.Solicitation.Solicitation", "Solicitation")
                         .WithOne("Evaluation")
                         .HasForeignKey("DefenseIO.Domain.Domains.Contracting.Entities.Solicitation.SolicitationEvaluation", "SolicitationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DefenseIO.Domain.Domains.Geographic.City", b =>
+                {
+                    b.HasOne("DefenseIO.Domain.Domains.Geographic.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -316,7 +363,14 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
 
                                     b2.HasKey("UserProviderUserId");
 
+                                    b2.HasIndex("CityId");
+
                                     b2.ToTable("Provider");
+
+                                    b2.HasOne("DefenseIO.Domain.Domains.Geographic.City", "City")
+                                        .WithMany()
+                                        .HasForeignKey("CityId")
+                                        .OnDelete(DeleteBehavior.Cascade);
 
                                     b2.HasOne("DefenseIO.Domain.Domains.Users.User")
                                         .WithOne("PrimaryLocation")

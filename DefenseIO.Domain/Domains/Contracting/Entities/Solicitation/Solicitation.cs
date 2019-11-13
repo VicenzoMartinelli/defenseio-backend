@@ -1,5 +1,4 @@
-﻿using DefenseIO.Domain.Domains.Geographic.Services;
-using DefenseIO.Domain.Domains.Users;
+﻿using DefenseIO.Domain.Domains.Users;
 using System;
 
 namespace DefenseIO.Domain.Domains.Contracting.Entities.Solicitation
@@ -29,20 +28,27 @@ namespace DefenseIO.Domain.Domains.Contracting.Entities.Solicitation
 
     public Solicitation RecalculateCost()
     {
-      var days = EndDateTime.Value - StartDateTime;
+      var days = EndDateTime.HasValue ? (EndDateTime.Value - StartDateTime).TotalDays : 1;
 
       switch (AttendedModality.Method)
       {
         case BilingMethod.Hour:
-          var hoursPerday = TurnOver.Value - TurnStart.Value;
+          if (TurnOver.HasValue)
+          {
+            var hoursPerday = TurnOver.Value - TurnStart.Value;
 
-          FinalCost = Math.Ceiling(days.TotalDays * hoursPerday.TotalHours * AttendedModality.BasicValue);
+            FinalCost = Math.Ceiling(days * hoursPerday.TotalHours * AttendedModality.BasicValue);
+          }
+          else
+          {
+            FinalCost = AttendedModality.BasicValue;
+          }
           break;
         case BilingMethod.Period:
-          FinalCost = Math.Ceiling(days.TotalDays * AttendedModality.BasicValue);
+          FinalCost = Math.Ceiling(days * AttendedModality.BasicValue);
           break;
         case BilingMethod.KiloMeter:
-          FinalCost = Math.Ceiling(AttendedModality.BasicValue * new DistanceService().GetDistanceBetweenTwoPointsInKms(new GeoPoint(Location.Latitude, Location.Longitude), null));
+          FinalCost = Math.Ceiling(AttendedModality.BasicValue * KiloMeters.Value);
           break;
         case BilingMethod.Fixed:
           FinalCost = Math.Ceiling(AttendedModality.BasicValue);

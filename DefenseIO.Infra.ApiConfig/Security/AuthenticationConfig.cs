@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DefenseIO.Infra.ApiConfig.Security
 {
@@ -33,6 +34,21 @@ namespace DefenseIO.Infra.ApiConfig.Security
           ValidateIssuer = true,
           ValidateAudience = false,
           ValidIssuer = secObj.Audience
+        };
+        x.Events = new JwtBearerEvents
+        {
+          OnMessageReceived = context =>
+          {
+            var accessToken = context.Request.Query["access_token"];
+
+            var path = context.HttpContext.Request.Path;
+            if (!string.IsNullOrEmpty(accessToken) &&
+                (path.StartsWithSegments("/chat")))
+            {
+              context.Token = accessToken;
+            }
+            return Task.CompletedTask;
+          }
         };
       }).Services;
     }

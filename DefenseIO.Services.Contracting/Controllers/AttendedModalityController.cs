@@ -1,7 +1,9 @@
-﻿using DefenseIO.Domain.Domains.Users.Interfaces;
+﻿using DefenseIO.Domain.Domains.Contracting.Entities;
+using DefenseIO.Domain.Domains.Users.Interfaces;
 using DefenseIO.Infra.ApiConfig.Abstracts;
 using DefenseIO.Infra.Shared.Notifications;
 using DefenseIO.Services.Contracting.Commands.AttendedModality;
+using DefenseIO.Services.Contracting.Queries.AttendedModalities;
 using DefenseIO.Services.Contracting.Queries.Modality;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -61,5 +63,17 @@ namespace DefenseIO.Services.Contracting.Controllers
 
       return await ResponseOkIfNotExistsNotificationsAsync();
     }
+
+    [HttpGet("all/{type}")]
+    public async Task<IActionResult> FindAttendedModalities(ModalityType type)
+    {
+      var res = await _mediator.Send(new FindAttendedModalitiesByTypeQuery()
+      {
+        Key = type
+      });
+
+      return await ResponseOkIfNotExistsNotificationsAsync(res);
+    }
+
   }
 }

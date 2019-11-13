@@ -1,10 +1,12 @@
 ﻿using DefenseIO.Domain.Domains.Users;
 using DefenseIO.Domain.Domains.Users.Interfaces;
 using DefenseIO.Domain.Domains.Users.ViewModels;
+using DefenseIO.Infra.DistributedCommunication.Commands;
 using DefenseIO.Infra.Shared.Extensions;
 using DefenseIO.Infra.Shared.Notifications;
 using DefenseIO.Infra.Shared.ViewModels;
 using DefenseIO.Services.Identity.Services;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System.Threading;
@@ -20,6 +22,7 @@ namespace DefenseIO.Services.Identity.Commands.Registrer
     private readonly IProviderUserRepository _providerRepository;
     private readonly NotificationContext _notificationContext;
     private readonly AuthenticationService _service;
+    private readonly IBusControl _busControl;
 
     public RegisterUserCommandHandler(
       UserManager<User> userManager,
@@ -27,6 +30,7 @@ namespace DefenseIO.Services.Identity.Commands.Registrer
       IClientUserRepository clientRepository,
       IProviderUserRepository providerRepository,
       NotificationContext notificationContext,
+      IBusControl busControl,
       AuthenticationService service)
     {
       _userManager = userManager;
@@ -34,6 +38,7 @@ namespace DefenseIO.Services.Identity.Commands.Registrer
       _clientRepository = clientRepository;
       _providerRepository = providerRepository;
       _notificationContext = notificationContext;
+      _busControl = busControl;
       _service = service;
     }
 
@@ -88,6 +93,25 @@ namespace DefenseIO.Services.Identity.Commands.Registrer
           BrazilianInscricaoEstadual = request.BrazilianInscricaoEstadual,
           LicenseValidity = request.LicenseValidity,
           UserId = user.Id
+        });
+
+        await _busControl.Send(new UpdateProviderDataCommand()
+        {
+          Name = user.Name,
+          Address = request.Address,
+          AddressNumber = request.AddressNumber,
+          BrazilianInscricaoEstadual = request.BrazilianInscricaoEstadual,
+          Burgh = request.Burgh,
+          Cep = request.Cep,
+          Longitude = request.Longitude,
+          Latitude = request.Latitude,
+          CityId = request.CityId,
+          Complement = request.Complement,
+          DocumentIdentifier = request.DocumentIdentifier,
+          Email = request.Email,
+          Id = user.Id,
+          LicenseValidity = request.LicenseValidity,
+          PhoneNumber = request.PhoneNumber
         });
       }
 

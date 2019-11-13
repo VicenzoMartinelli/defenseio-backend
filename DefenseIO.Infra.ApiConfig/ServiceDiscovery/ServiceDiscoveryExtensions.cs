@@ -1,6 +1,5 @@
 ﻿using Consul;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 
 namespace DefenseIO.Infra.ApiConfig.ServiceDiscovery
@@ -20,7 +19,7 @@ namespace DefenseIO.Infra.ApiConfig.ServiceDiscovery
       });
 
       services.AddSingleton(serviceConfig);
-      services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
+      services.AddHostedService<ServiceDiscoveryHostedService>();
       services.AddSingleton<IConsulClient, ConsulClient>(p => consulClient);
 
       return services;

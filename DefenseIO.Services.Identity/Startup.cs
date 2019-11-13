@@ -3,11 +3,13 @@ using DefenseIO.Domain.Domains.Users.Interfaces;
 using DefenseIO.Infra.ApiConfig;
 using DefenseIO.Infra.ApiConfig.Filters;
 using DefenseIO.Infra.ApiConfig.InputValidate;
+using DefenseIO.Infra.DistributedCommunication.Commands;
 using DefenseIO.Infra.Shared.Messages;
 using DefenseIO.Services.Identity.Data.Contexts;
 using DefenseIO.Services.Identity.Data.Repositories;
 using DefenseIO.Services.Identity.Services;
 using FluentValidation.AspNetCore;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -68,6 +70,22 @@ namespace DefenseIO.Services.Identity
         services.Configure<ApiBehaviorOptions>(options =>
         {
           options.SuppressModelStateInvalidFilter = true;
+        });
+
+        services.AddMassTransit(x =>
+        {
+          x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+          {
+            var baseUri = $"rabbitmq://{Configuration["RabbitMQHost"]}";
+
+            var host = cfg.Host(new Uri(baseUri), hostConfig =>
+            {
+              hostConfig.Username("guest");
+              hostConfig.Password("guest");
+            });
+
+            EndpointConvention.Map<UpdateProviderDataCommand>(new Uri($"{baseUri}/update_provider"));
+          }));
         });
       });
     }

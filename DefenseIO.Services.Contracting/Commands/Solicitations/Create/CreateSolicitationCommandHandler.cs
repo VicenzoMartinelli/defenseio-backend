@@ -48,7 +48,7 @@ namespace DefenseIO.Services.Contracting.Commands.Solicitations
         AttendedModalityId = attendedModality.Id,
         ClientId = request.ClientId,
         ModalityType = attendedModality.Modality.Key,
-        NumberOfEmployeers = request.NumberOfEmployeers,
+        NumberOfEmployeers = 1,
         KiloMeters = request.KiloMeters,
         ProviderId = request.ProviderId,
         Remark = request.Remark,

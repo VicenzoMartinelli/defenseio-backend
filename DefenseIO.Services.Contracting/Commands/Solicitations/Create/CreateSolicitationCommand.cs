@@ -16,8 +16,6 @@ namespace DefenseIO.Services.Contracting.Commands.Solicitations.Create
     public TimeSpan? TurnStart { get; set; }
     public TimeSpan? TurnOver { get; set; }
     public double? KiloMeters { get; set; }
-    public int? NumberOfEmployeers { get; set; }
-    public double FinalCost { get; set; }
     public string Remark { get; set; }
 
     // ADDRESS OF SOLICITATION

@@ -26,6 +26,12 @@ namespace DefenseIO.Services.Chat.Data.Mappings
 
       builder
         .Property(x => x.IsAttachment);
+
+      builder
+        .Property(x => x.DestinationUserName);
+
+      builder
+        .Property(x => x.SendedAt);
     }
   }
 }

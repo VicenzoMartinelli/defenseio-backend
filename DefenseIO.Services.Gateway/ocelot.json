@@ -23,7 +23,7 @@
     },
     {
       "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "ws",
       "ServiceName": "chat",
       "UpstreamPathTemplate": "/api/chatting/{everything}",
       "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE", "OPTIONS" ]

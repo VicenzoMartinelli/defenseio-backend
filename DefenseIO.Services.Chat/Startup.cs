@@ -3,9 +3,8 @@ using DefenseIO.Infra.ApiConfig;
 using DefenseIO.Services.Chat.Data.Contexts;
 using DefenseIO.Services.Chat.Data.Repositories;
 using DefenseIO.Services.Chat.Hubs;
-using DefenseIO.Services.Chat.Services;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,19 +25,19 @@ namespace DefenseIO.Services.Chat
         Configuration,
         () =>
         {
+          services.AddMediatR(typeof(Startup).Assembly);
           services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
-          services.AddScoped<ChatService>();
           services.AddSignalR();
         });
     }
 
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app)
     {
       app.UseDefaultDefenseIOPipeline(Configuration, () =>
       {
         app.UseSignalR((x) =>
         {
-          x.MapHub<ChatHub>("chat");
+          x.MapHub<ChatHub>("/chat");
         });
       });
     }

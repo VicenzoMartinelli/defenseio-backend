@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DefenseIO.Domain.Domains.Users;
+using System;
 
 namespace DefenseIO.Domain.Domains.Contracting.Entities
 {
@@ -11,6 +12,7 @@ namespace DefenseIO.Domain.Domains.Contracting.Entities
     public Guid ProviderUserId { get; set; }
     public Guid ModalityId { get; set; }
 
+    public virtual ProviderUser Provider { get; set; }
     public virtual Modality Modality { get; set; }
   }
 }

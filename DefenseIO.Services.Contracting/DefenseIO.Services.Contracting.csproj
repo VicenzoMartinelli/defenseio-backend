@@ -12,7 +12,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20191109174348_added-provider-fields.cs" />
+    <Compile Remove="Data\Migrations\20191109174348_added-provider-fields.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="MassTransit" Version="5.5.6" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="5.5.6" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.5.6" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
@@ -23,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DefenseIO.Domain\DefenseIO.Domain.csproj" />
     <ProjectReference Include="..\DefenseIO.Infra.ApiConfig\DefenseIO.Infra.ApiConfig.csproj" />
+    <ProjectReference Include="..\DefenseIO.Infra.DistributedCommunication\DefenseIO.Infra.DistributedCommunication.csproj" />
   </ItemGroup>
 
 </Project>
