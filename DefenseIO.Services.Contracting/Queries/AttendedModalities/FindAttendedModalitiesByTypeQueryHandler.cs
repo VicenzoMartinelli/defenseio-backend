@@ -35,10 +35,10 @@ namespace DefenseIO.Services.Contracting.Queries.Modality
           Id = x.Id,
           BasicValue = x.BasicValue,
           Method = x.Method,
-          ProviderName = x.Provider.User.Name,
+          ProviderName = x.Provider.Name,
           ProviderRate = 4,
           MultiplyByEmployeesNumber = x.MultiplyByEmployeesNumber,
-          ProviderUserId = x.Provider.UserId
+          ProviderUserId = x.Id
         }).AsEnumerable();
 
       return Task.FromResult(res);

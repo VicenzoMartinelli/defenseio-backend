@@ -50,7 +50,7 @@ namespace DefenseIO.Services.Contracting.Commands.Solicitations
         ModalityType = attendedModality.Modality.Key,
         NumberOfEmployeers = 1,
         KiloMeters = request.KiloMeters,
-        ProviderId = request.ProviderId,
+        ProviderId = attendedModality.ProviderUserId,
         Remark = request.Remark,
         SolicitationDate = request.SolicitationDate,
         EndDateTime = request.EndDateTime,

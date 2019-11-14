@@ -84,7 +84,7 @@ namespace DefenseIO.Services.Identity
               hostConfig.Password("guest");
             });
 
-            EndpointConvention.Map<UpdateProviderDataCommand>(new Uri($"{baseUri}/update_provider"));
+            EndpointConvention.Map<UserCreatedEvent>(new Uri($"{baseUri}/update_provider"));
           }));
         });
       });

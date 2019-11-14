@@ -16,9 +16,14 @@ namespace DefenseIO.Services.Contracting.Data.Mappings
         .HasKey(x => x.Id);
 
       builder
-        .Property(x => x.ClientId);
+        .HasOne(x => x.Client)
+        .WithMany()
+        .HasForeignKey(x => x.ClientId);
+
       builder
-        .Property(x => x.ProviderId);
+        .HasOne(x => x.Provider)
+        .WithMany()
+        .HasForeignKey(x => x.ProviderId);
 
       builder.Property(t => t.Status)
         .HasConversion(new EnumToNumberConverter<SolicitationStatus, int>())

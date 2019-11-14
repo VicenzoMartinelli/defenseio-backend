@@ -44,7 +44,7 @@ namespace DefenseIO.Services.Contracting
 
         services.AddMassTransit(x =>
         {
-          x.AddConsumer<UpdateProviderDataConsumer>();
+          x.AddConsumer<UserCreatedEventHandler>();
 
           x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
           {
@@ -60,7 +60,7 @@ namespace DefenseIO.Services.Contracting
             {
               ep.UseMessageRetry(r => r.Interval(2, 100));
 
-              ep.ConfigureConsumer<UpdateProviderDataConsumer>(provider);
+              ep.ConfigureConsumer<UserCreatedEventHandler>(provider);
             });
           }));
         });

@@ -19,16 +19,20 @@ namespace DefenseIO.Domain.Domains.Contracting.Entities.Solicitation
     public double? KiloMeters { get; set; }
     public double FinalCost { get; set; }
 
+    public Guid ProviderId { get; set; }
+    public Guid ClientId { get; set; }
+
+    public virtual ContractingUser Client { get; set; }
+    public virtual ContractingUser Provider { get; set; }
     public AttendedModality AttendedModality { get; set; }
     public SolicitationEvaluation Evaluation { get; set; }
 
-    public Guid ProviderId { get; set; }
-    public Guid ClientId { get; set; }
     public Guid AttendedModalityId { get; set; }
 
     public Solicitation RecalculateCost()
     {
       var days = EndDateTime.HasValue ? (EndDateTime.Value - StartDateTime).TotalDays : 1;
+      var value = AttendedModality.MultiplyByEmployeesNumber ? AttendedModality.BasicValue * (NumberOfEmployeers ?? 1) : AttendedModality.BasicValue;
 
       switch (AttendedModality.Method)
       {
@@ -37,26 +41,26 @@ namespace DefenseIO.Domain.Domains.Contracting.Entities.Solicitation
           {
             var hoursPerday = TurnOver.Value - TurnStart.Value;
 
-            FinalCost = Math.Ceiling(days * hoursPerday.TotalHours * AttendedModality.BasicValue);
+            FinalCost = Math.Ceiling(days * hoursPerday.TotalHours * value);
           }
           else
           {
-            FinalCost = AttendedModality.BasicValue;
+            FinalCost = value;
           }
           break;
         case BilingMethod.Period:
-          FinalCost = Math.Ceiling(days * AttendedModality.BasicValue);
+          FinalCost = Math.Ceiling(days * value);
           break;
         case BilingMethod.KiloMeter:
-          FinalCost = Math.Ceiling(AttendedModality.BasicValue * KiloMeters.Value);
+          FinalCost = Math.Ceiling(value * KiloMeters.Value);
           break;
         case BilingMethod.Fixed:
-          FinalCost = Math.Ceiling(AttendedModality.BasicValue);
+          FinalCost = Math.Ceiling(value);
           break;
-
         default:
           break;
       }
+
       return this;
     }
   }

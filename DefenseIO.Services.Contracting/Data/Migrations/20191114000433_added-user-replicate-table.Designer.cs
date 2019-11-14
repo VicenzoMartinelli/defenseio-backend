@@ -3,15 +3,17 @@ using System;
 using DefenseIO.Services.Contracting.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DefenseIO.Services.Contracting.Data.Migrations
 {
     [DbContext(typeof(ContractingContext))]
-    partial class ContractingContextModelSnapshot : ModelSnapshot
+    [Migration("20191114000433_added-user-replicate-table")]
+    partial class addeduserreplicatetable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +93,8 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<string>("Rg");
+                    b.Property<string>("Rg")
+                        .IsRequired();
 
                     b.Property<int>("Type");
 
@@ -118,25 +121,25 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5ff00d73-33a9-46c3-90e3-41c33f8f24d6"),
+                            Id = new Guid("47ea2033-b73e-487d-9ba1-3a9398e620d8"),
                             Description = "Segurança pessoal",
                             Key = "Personal"
                         },
                         new
                         {
-                            Id = new Guid("43c7012c-cf01-4f17-9199-01c9fccee2d1"),
+                            Id = new Guid("66d338a1-3040-4aae-b4a4-6405374c2e39"),
                             Description = "Escolta armada",
                             Key = "ArmedEscort"
                         },
                         new
                         {
-                            Id = new Guid("d22000ff-0fc3-41b3-87ca-cdfe67c980b6"),
+                            Id = new Guid("638d1bec-049d-462c-aeb6-313044ba95a6"),
                             Description = "Transporte de valores",
                             Key = "ValuesTransportation"
                         },
                         new
                         {
-                            Id = new Guid("d661d544-f841-4635-90df-f605d7bfaea2"),
+                            Id = new Guid("96c43078-5b52-4f75-94aa-4ef8d07c3b03"),
                             Description = "Segurança patrimonial",
                             Key = "AssetSurveillance"
                         });
@@ -179,10 +182,6 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AttendedModalityId");
-
-                    b.HasIndex("ClientId");
-
-                    b.HasIndex("ProviderId");
 
                     b.ToTable("Solicitation");
                 });
@@ -235,16 +234,6 @@ namespace DefenseIO.Services.Contracting.Data.Migrations
                     b.HasOne("DefenseIO.Domain.Domains.Contracting.Entities.AttendedModality", "AttendedModality")
                         .WithMany()
                         .HasForeignKey("AttendedModalityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DefenseIO.Domain.Domains.Contracting.Entities.ContractingUser", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DefenseIO.Domain.Domains.Contracting.Entities.ContractingUser", "Provider")
-                        .WithMany()
-                        .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.OwnsOne("DefenseIO.Domain.Domains.Users.Location", "Location", b1 =>

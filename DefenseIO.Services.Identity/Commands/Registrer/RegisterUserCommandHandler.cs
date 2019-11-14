@@ -94,26 +94,29 @@ namespace DefenseIO.Services.Identity.Commands.Registrer
           LicenseValidity = request.LicenseValidity,
           UserId = user.Id
         });
-
-        await _busControl.Send(new UpdateProviderDataCommand()
-        {
-          Name = user.Name,
-          Address = request.Address,
-          AddressNumber = request.AddressNumber,
-          BrazilianInscricaoEstadual = request.BrazilianInscricaoEstadual,
-          Burgh = request.Burgh,
-          Cep = request.Cep,
-          Longitude = request.Longitude,
-          Latitude = request.Latitude,
-          CityId = request.CityId,
-          Complement = request.Complement,
-          DocumentIdentifier = request.DocumentIdentifier,
-          Email = request.Email,
-          Id = user.Id,
-          LicenseValidity = request.LicenseValidity,
-          PhoneNumber = request.PhoneNumber
-        });
       }
+
+      await _busControl.Send(new UserCreatedEvent()
+      {
+        Name = user.Name,
+        Address = request.Address,
+        AddressNumber = request.AddressNumber,
+        BrazilianInscricaoEstadual = request.BrazilianInscricaoEstadual,
+        Burgh = request.Burgh,
+        Cep = request.Cep,
+        Longitude = request.Longitude,
+        Latitude = request.Latitude,
+        CityId = request.CityId,
+        Complement = request.Complement,
+        DocumentIdentifier = request.DocumentIdentifier,
+        Email = request.Email,
+        Id = user.Id,
+        LicenseValidity = request.LicenseValidity,
+        PhoneNumber = request.PhoneNumber,
+        Rg = request.Rg,
+        BirthDate = request.BirthDate,
+        Type = request.Type
+      });
 
       return exit.ReturningSuccess(await _service.GenerateToken(user));
     }
