@@ -77,6 +77,13 @@ namespace DefenseIO.Services.Contracting.Data.Mappings
       build
         .Property(x => x.Longitude)
         .IsRequired();
+
+      build
+        .Property(x => x.CurrentRating)
+        .HasDefaultValue(3.0D)
+        .IsRequired();
+
+      build.Property(x => x.KiloMetersSearchRadius);
     }
   }
 }

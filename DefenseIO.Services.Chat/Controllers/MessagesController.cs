@@ -9,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,22 +54,32 @@ namespace DefenseIO.Services.Chat.Controllers
     {
       var userType = userLoggedAcessor.Type;
       Func<ChatMessage, bool> predicate = (x) => x.ClientId == userLoggedAcessor.UserId;
-      Func<ChatMessage, (string userId, string username)> select = (x) => (x.ProviderId.ToString(), x.DestinationUserName);
+      Func<ChatMessage, bool> predicateUserName = (x) => x.IsProviderSend == true;
+      Func<ChatMessage, (string providerId, string clientId)> select = (x) => (x.ProviderId.ToString(), x.ClientId.ToString());
 
       if (userType == UserType.Provider)
       {
         predicate = (x) => x.ProviderId == userLoggedAcessor.UserId;
-        select = (x) => (x.ClientId.ToString(), x.DestinationUserName);
+        predicateUserName = (x) => x.IsProviderSend == false;
       }
 
+      var userName = (from mess in _chatContext.Messages
+                      where predicate(mess)
+                      where predicateUserName(mess)
+                      select mess.SenderName).FirstOrDefault();
+
+      if (userName == null)
+      {
+        return await ResponseOkAsync(new List<ChatMessage>());
+      }
       var messages = from mess in _chatContext.Messages
                      where predicate(mess)
                      group mess by @select(mess) into grp
                      let lastMessage = grp.OrderByDescending(x => x.SendedAt).FirstOrDefault()
                      select new
                      {
-                       UserId = grp.Key.userId,
-                       UserName = grp.Key.username,
+                       UserId = userType == UserType.Provider ? grp.Key.clientId : grp.Key.providerId,
+                       UserName = userName,
                        lastMessage.IsProviderSend,
                        lastMessage.Content,
                        lastMessage.IsAttachment

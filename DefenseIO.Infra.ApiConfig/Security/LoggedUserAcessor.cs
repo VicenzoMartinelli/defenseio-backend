@@ -4,7 +4,6 @@ using DefenseIO.Infra.Shared.Extensions;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 
@@ -32,7 +31,7 @@ namespace DefenseIO.Infra.ApiConfig.Security
 
     public UserType Type => _type = (int)_type == 999 ? Claims.Single(x => x.Type.Equals(CustomClaims.UserTypeClaim)).Value.FromNumericString<UserType>() : _type;
 
-    public string Name => _name = !_name.IsPresent() ? Claims.Single(x => x.Type.Equals(JwtRegisteredClaimNames.UniqueName)).Value : _name;
+    public string Name => _name = !_name.IsPresent() ? Claims.Single(x => x.Type.Equals(ClaimTypes.Name)).Value : _name;
 
     public string Email => _email = !_email.IsPresent() ? Claims.Single(x => x.Type.Equals(ClaimTypes.Email)).Value : _email;
 

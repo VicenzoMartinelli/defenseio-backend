@@ -28,7 +28,7 @@ namespace DefenseIO.Services.Chat.Data.Mappings
         .Property(x => x.IsAttachment);
 
       builder
-        .Property(x => x.DestinationUserName);
+        .Property(x => x.SenderName);
 
       builder
         .Property(x => x.SendedAt);

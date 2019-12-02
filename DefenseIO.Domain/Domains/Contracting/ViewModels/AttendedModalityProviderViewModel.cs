@@ -12,5 +12,7 @@ namespace DefenseIO.Domain.Domains.Contracting.ViewModels
     public Guid ProviderUserId { get; set; }
     public string ProviderName { get; set; }
     public double ProviderRate { get; set; }
+    public double Longitude { get; set; }
+    public double Latitude { get; set; }
   }
 }

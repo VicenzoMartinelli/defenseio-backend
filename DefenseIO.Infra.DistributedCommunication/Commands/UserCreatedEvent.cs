@@ -23,5 +23,6 @@ namespace DefenseIO.Infra.DistributedCommunication.Commands
     public string Rg { get; set; }
     public DateTime BirthDate { get; set; }
     public UserType Type { get; set; }
+    public long KiloMetersSearchRadius { get; set; }
   }
 }

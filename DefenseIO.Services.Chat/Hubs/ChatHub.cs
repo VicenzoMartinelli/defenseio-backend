@@ -31,6 +31,8 @@ namespace DefenseIO.Services.Chat.Hubs
         msg.ClientId = _acessor.UserId;
       }
 
+      msg.SenderName = _acessor.Name;
+
       await _chatRepository.Add(msg);
       await _chatRepository.SaveChanges();
 

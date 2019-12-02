@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DefenseIO.Domain.Domains.Contracting.Entities.Solicitation;
+﻿using DefenseIO.Domain.Domains.Contracting.Entities.Solicitation;
 using DefenseIO.Domain.Domains.Contracting.Interfaces;
 using DefenseIO.Domain.Domains.Users;
 using DefenseIO.Infra.Shared.Extensions;
@@ -14,18 +13,15 @@ namespace DefenseIO.Services.Contracting.Commands.Solicitations
 {
   public class CreateSolicitationCommandHandler : IRequestHandler<CreateSolicitationCommand, bool>
   {
-    private readonly IMapper _mapper;
     private readonly NotificationContext _notificationContext;
     private readonly IAttendedModalityRepository _attendedModalityRepository;
     private readonly ISolicitationRepository _solicitationRepository;
 
     public CreateSolicitationCommandHandler(
-      IMapper mapper,
       NotificationContext notificationContext,
       IAttendedModalityRepository attendedModalityRepository,
       ISolicitationRepository solicitationRepository)
     {
-      _mapper = mapper;
       _notificationContext = notificationContext;
       _attendedModalityRepository = attendedModalityRepository;
       _solicitationRepository = solicitationRepository;

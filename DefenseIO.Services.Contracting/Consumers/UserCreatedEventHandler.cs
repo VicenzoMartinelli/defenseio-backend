@@ -36,7 +36,8 @@ namespace DefenseIO.Services.Contracting.Consumers
         BirthDate = context.Message.BirthDate,
         DocumentIdentifier = context.Message.DocumentIdentifier,
         Rg = context.Message.Rg,
-        Type = context.Message.Type
+        Type = context.Message.Type,
+        KiloMetersSearchRadius = context.Message.KiloMetersSearchRadius
       });
 
       await _repository.SaveChanges();

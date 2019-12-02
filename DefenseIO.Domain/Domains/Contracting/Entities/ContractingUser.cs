@@ -23,5 +23,8 @@ namespace DefenseIO.Domain.Domains.Contracting.Entities
     public DateTime LicenseValidity { get; set; }
     public string Rg { get; set; }
     public DateTime BirthDate { get; set; }
+    public double CurrentRating { get; set; }
+    public long KiloMetersSearchRadius { get; set; }
+
   }
 }

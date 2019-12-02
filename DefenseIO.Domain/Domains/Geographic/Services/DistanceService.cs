@@ -6,32 +6,59 @@ namespace DefenseIO.Domain.Domains.Geographic.Services
   {
     public double GetDistanceBetweenTwoPointsInKms(GeoPoint p1, GeoPoint p2)
     {
-      double deg2radMultiplier = Math.PI / 180;
+      if ((p1.Latitude == p2.Latitude) && (p1.Longitude == p2.Longitude))
+      {
+        return 0;
+      }
+      else
+      {
+        var radlat1 = Math.PI * p1.Latitude / 180;
 
-      p1.Latitude *= deg2radMultiplier;
-      p1.Longitude *= deg2radMultiplier;
-      p2.Latitude *= deg2radMultiplier;
-      p1.Longitude *= deg2radMultiplier;
+        var radlat2 = Math.PI * p2.Latitude / 180;
 
-      double radius = 6378.137; // earth mean radius defined by WGS84
+        var theta = p1.Longitude - p2.Longitude;
 
-      double dlon = p2.Longitude - p1.Longitude;
+        var radtheta = Math.PI * theta / 180;
 
-      double distance = Math.Acos(Math.Sin(p1.Latitude) * Math.Sin(p2.Latitude) + Math.Cos(p1.Latitude) * Math.Cos(p2.Latitude) * Math.Cos(dlon)) * radius;
+        var dist = Math.Sin(radlat1) * Math.Sin(radlat2) + Math.Cos(radlat1) * Math.Cos(radlat2) * Math.Cos(radtheta);
 
-      return distance;
+        if (dist > 1)
+        {
+          dist = 1;
+        }
+        dist = Math.Acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+
+        // TO kms
+        dist *= 1.609344;
+
+        return dist;
+      }
+    }
+
+    private double deg2rad(double deg)
+    {
+      return (deg * Math.PI / 180.0);
+    }
+
+    //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    //::  This function converts radians to decimal degrees             :::
+    //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    private double rad2deg(double rad)
+    {
+      return (rad / Math.PI * 180.0);
     }
   }
+}
+public class GeoPoint
+{
+  public double Latitude { get; set; }
+  public double Longitude { get; set; }
 
-  public class GeoPoint
+  public GeoPoint(double latitude, double longitude)
   {
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
-
-    public GeoPoint(double latitude, double longitude)
-    {
-      Latitude = latitude;
-      Longitude = longitude;
-    }
+    Latitude = latitude;
+    Longitude = longitude;
   }
 }

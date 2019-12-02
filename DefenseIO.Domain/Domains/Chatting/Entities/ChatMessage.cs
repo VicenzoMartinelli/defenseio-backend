@@ -11,7 +11,7 @@ namespace DefenseIO.Domain.Domains.Chatting
     public bool IsProviderSend { get; set; }
     public bool IsAttachment { get; set; }
     public string Content { get; set; }
-    public string DestinationUserName { get; set; }
+    public string SenderName { get; set; }
 
     public ChatMessage()
     {
