@@ -67,13 +67,14 @@ namespace DefenseIO.Services.Contracting.Queries.Modality
       var userPoint = new GeoPoint(locationData.Latitude, locationData.Longitude);
 
       var result = query
-        .Where(x =>
-          distService.GetDistanceBetweenTwoPointsInKms(new GeoPoint(x.Latitude, x.Longitude), userPoint) <= locationData.KiloMetersSearchRadius)
         .Select(x =>
         {
           x.ProviderRate = Math.Round(x.ProviderRate, MidpointRounding.AwayFromZero);
+          x.Distance = distService.GetDistanceBetweenTwoPointsInKms(new GeoPoint(x.Latitude, x.Longitude), userPoint);
           return x;
-        });
+        })
+        .Where(x => x.Distance <= locationData.KiloMetersSearchRadius)
+        .OrderByDescending(x => x.ProviderRate).ThenBy(x => x.Distance);
       return result;
     }
   }
